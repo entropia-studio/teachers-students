@@ -1,4 +1,5 @@
-.container{
+.container-component{
+    
     display: flex;    
     flex-direction: column;
     justify-content: center;    
@@ -6,9 +7,5 @@
     align-content: center;
     align-items: center;
     height: 100%;
-
-    .login{
-        // border: 1px solid grey;
-    }
-
+    
 }

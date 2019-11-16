@@ -1,11 +1,5 @@
-<div class="container">  
-  <div class="login">
-      <mat-card>
-          <mat-card-title>Login</mat-card-title>
-          <mat-card-content>
-            Email:
-            Password: 
-          </mat-card-content>
-      </mat-card>
-  </div>
+<div class="container-component">   
+  <login-form
+    (submitted)="loginUser($event)">
+</login-form>
 </div>

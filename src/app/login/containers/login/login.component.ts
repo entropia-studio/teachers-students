@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../../models/user';
+import { AuthService } from '../../services/auth.service';
+import { TouchSequence } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
+
+  }
+
+  loginUser(user: User){    
+    this.authService.login(user);
   }
 
 }
