@@ -11,13 +11,17 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button'; 
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule }    from '@angular/common/http';
+import { Routes, RouterModule } from '@angular/router';
 
+const routes: Routes = [
+  { path: '' , component: LoginComponent}
+];
 
 @NgModule({
   declarations: [
     LoginComponent, 
-    LoginFormComponent],
+    LoginFormComponent
+  ],
   imports: [
     CommonModule,
     MatCardModule,
@@ -25,7 +29,7 @@ import { HttpClientModule }    from '@angular/common/http';
     MatButtonModule,
     FormsModule, 
     ReactiveFormsModule,
-    HttpClientModule
+    RouterModule.forChild(routes)  
   ]
 })
 export class LoginModule { }

@@ -1,0 +1,23 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>    
+    <span class="spacer"></span>    
+    <button mat-button (click)="logOut()">
+      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example user verified icon">exit_to_app</mat-icon>
+    </button>    
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 main-content">        
+          <li>
+              <a routerLink="/dashboard/teachers" routerLinkActive="active">Teachers</a> 
+          </li>
+          <li>
+              <a routerLink="/dashboard/students" routerLinkActive="active">Students</a>
+          </li>                
+    </div>
+    <div class="col-sm-9">
+      <router-outlet></router-outlet> 
+     </div>
+  </div>
+</div>

@@ -12,6 +12,9 @@
         <mat-form-field class="login-field">
           <input matInput placeholder="Password" formControlName="password" type="password">
         </mat-form-field>
+        <div class="alert alert-primary" *ngIf="statusLogin">
+          {{ statusLogin }}
+        </div>
       </mat-card-content>
       <mat-card-actions class="card-centered">
           <button mat-button type="submit">Send</button>
