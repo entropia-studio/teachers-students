@@ -12,11 +12,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from './store';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { AuthModule } from './auth/auth.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthInterceptor } from './auth.interceptor';
 
 const routes: Routes = [  
-  { path: '', redirectTo: 'teachers', pathMatch: 'full' }  
+  { path: '', redirectTo: 'teachers', pathMatch: 'full' },
+  { path: '**', redirectTo: 'teachers' }   
 ];
 
 @NgModule({
@@ -31,9 +33,9 @@ const routes: Routes = [
     DashboardModule,
     AuthModule,
     HttpClientModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, {enableTracing: false})
   ],
-  providers: [Store],
+  providers: [Store, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

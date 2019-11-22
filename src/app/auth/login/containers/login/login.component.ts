@@ -20,15 +20,15 @@ export class LoginComponent  {
 
   loginUser(user: User){    
 
-    this.authService.login(user).subscribe((resp: any) => {
-      if (resp.status !== 'success'){
+    this.authService.login(user).subscribe((user: User) => {      
+      
+      if (!user){
         this.status = 'Invalid email/password, please try again';
-      }else{
-        this.authService.registerUser(resp);        
-        this.router.navigate(['dashboard/teachers']);
+      }else{                
+        this.router.navigate(['/dashboard/teachers']);
       }
+      
     });
-
-  }
+  }  
 
 }

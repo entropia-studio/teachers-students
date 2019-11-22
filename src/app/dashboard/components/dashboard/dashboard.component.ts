@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardComponent {
 
   user$:  Observable<User>;
   subscription: Subscription;
@@ -21,16 +21,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private router: Router
   ) { }
 
-  ngOnInit() {   
-  }
-
-  ngOnDestroy(){
-
-  }
+  
 
   logOut(){
+
     this.authService.logout();
-    this.router.navigate(['/login']);
+    
+    this.router.navigate(['/auth/login']);
+
   }
 
 }

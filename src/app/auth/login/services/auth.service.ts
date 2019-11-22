@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Store } from 'src/app/store';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,35 +11,62 @@ export class AuthService {
 
   isLoggedIn = false;
   redirectUrl: string;
+  authorizationToken: string;
 
-  private loginUrl = 'http://localhost:3000/users/authenticate';  // URL to web api
+
+  loginUrl = 'http://localhost:3000/users/authenticate';  // URL to web api
+
+  currentUserSubject: BehaviorSubject<User>;
+  currentUser: Observable<User>;
+
 
   constructor(
-    private http: HttpClient,
-    private store: Store
-  ) { }
+    private http: HttpClient    
+  ) {
+    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+    this.currentUser = this.currentUserSubject.asObservable();
+  } 
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  login(user: User){
-    return this.http.post<User>(this.loginUrl, user, this.httpOptions);
+  login(user: User) : Observable<User>{
+
+    return this.http.post<any>(this.loginUrl, user, this.httpOptions)
+      .pipe(
+        map(loginResp => {         
+          
+          if (loginResp.status !== 'success'){
+            return null;
+          }
+
+          const user: User = {
+              token: loginResp.data.token,
+              name: loginResp.data.user.name
+          }
+            
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          this.currentUserSubject.next(user);
+          
+          return user;
+        })
+      )
+      
   }  
-
-  registerUser(resp: any){
-
-    const user: User = {
-      token: resp.data.token,
-      _id: resp.data.user._id,
-      name: resp.data.user.name
-    }
-    this.isLoggedIn = true;
-    this.store.set('user',user);
-  }
+  
 
   logout(): void {
-    this.isLoggedIn = false;
+  
+    localStorage.removeItem('currentUser');
+    this.currentUserSubject.next(null);
+    
+  }  
+
+  public get currentUserValue() : User {
+
+    return this.currentUserSubject.value;
+
   }
   
 }
