@@ -3,6 +3,7 @@ import { User } from '../models/user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +11,9 @@ import { map } from 'rxjs/operators';
 export class AuthService {
 
   isLoggedIn = false;
-  redirectUrl: string;
-  authorizationToken: string;
+  redirectUrl: string;  
 
-
-  loginUrl = 'http://localhost:3000/users/authenticate';  // URL to web api
+  loginUrl = `${environment.apiUrl}/users/authenticate`;  // URL to web api
 
   currentUserSubject: BehaviorSubject<User>;
   currentUser: Observable<User>;
@@ -45,6 +44,8 @@ export class AuthService {
               token: loginResp.data.token,
               name: loginResp.data.user.name
           }
+
+          console.log(`user logged ${user}`)
             
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
