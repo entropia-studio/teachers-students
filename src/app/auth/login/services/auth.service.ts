@@ -11,8 +11,7 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
 
   isLoggedIn = false;
-  redirectUrl: string;
-  authorizationToken: string;
+  redirectUrl: string;  
 
   loginUrl = `${environment.apiUrl}/users/authenticate`;  // URL to web api
 
@@ -45,6 +44,8 @@ export class AuthService {
               token: loginResp.data.token,
               name: loginResp.data.user.name
           }
+
+          console.log(`user logged ${user}`)
             
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
