@@ -33,6 +33,9 @@ app.get('/favicon.ico', function (req, res) {
     res.sendStatus(204);
 });
 
+var distDir = __dirname + "/dist/";
+app.use(express.static(distDir));
+
 function validateUser(req, res, next) {
 
     console.log(req.headers)

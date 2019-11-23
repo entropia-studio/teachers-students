@@ -1,7 +1,6 @@
 <h5>Students</h5>
 <input-search (searchTermTeacher)="searchStudents($event)"
-    [searchPlaceholder]="'Search student'"
-    [hasChanged]="hasChanged"
+    [searchPlaceholder]="'Search student'"    
     #inputSearchStudent>
   </input-search>
 <mat-accordion *ngIf="students$ | async as students">  
