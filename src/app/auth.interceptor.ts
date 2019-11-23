@@ -14,13 +14,16 @@ export class AuthInterceptor implements HttpInterceptor {
       
     if (req.url.includes('teachers') || req.url.includes('students')){
         
-        const currentUser = this.authService.currentUserValue;        
+        const currentUser = this.authService.currentUserValue;
         
-        const authReq = req.clone({
-            headers: req.headers.set('x-access-token', currentUser.token)
-        });
+        if (currentUser){
 
-        return next.handle(authReq);
+          const authReq = req.clone({
+            headers: req.headers.set('x-access-token', currentUser.token)
+          });
+
+          return next.handle(authReq);
+        }
     }
 
     return next.handle(req);    
