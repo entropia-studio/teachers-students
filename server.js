@@ -8,6 +8,7 @@ const mongoose = require('./src/app/config/database'); //database configuration
 var jwt = require('jsonwebtoken');
 const app = express();
 const cors = require('cors');
+const path = require('path');
 
 app.use(cors());
 
@@ -33,8 +34,13 @@ app.get('/favicon.ico', function (req, res) {
     res.sendStatus(204);
 });
 
-var distDir = __dirname + "/dist/";
+var distDir = __dirname + "/dist/teachers-students";
+
 app.use(express.static(distDir));
+
+app.get('/*', function(req, res) {
+    res.sendFile(path.join(__dirname + '/dist/teachers-students/index.html'));
+});
 
 function validateUser(req, res, next) {
 
