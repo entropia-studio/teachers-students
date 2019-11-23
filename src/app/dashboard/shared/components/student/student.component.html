@@ -1,0 +1,10 @@
+<mat-divider></mat-divider>
+<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      {{ student.name +' '+ student.lastname }}
+    </mat-panel-title>    
+  </mat-expansion-panel-header>
+  <p>{{ student.address }}</p>
+  <p>Phone: {{ student.phone }}</p>
+</mat-expansion-panel>

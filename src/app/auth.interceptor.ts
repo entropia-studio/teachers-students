@@ -12,7 +12,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
       
-    if (req.url.startsWith("http://localhost:3000/teachers")){
+    if (req.url.includes('teachers') || req.url.includes('students')){
         
         const currentUser = this.authService.currentUserValue;        
         

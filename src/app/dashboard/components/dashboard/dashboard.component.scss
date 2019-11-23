@@ -2,13 +2,62 @@
   flex: 1 1 auto;
 }
 
-.main-content{
+.menu-options{
     
-  li{      
-    list-style: none;
-    list-style-type: none;
+  
+
+  .active{
+    font-weight: bold;
+  }
+
+  border: 1px solid orange;
+
+  height: 100%;
+
+}
+
+.dashboard-container {
+  position: absolute;
+  top: 60px;
+  bottom: 0px;
+  left: 0;
+  right: 0;
+
+  .dashboard-sidenav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    background: #262626;
+    padding: 1rem;
+
+    li{      
+      list-style: none;
+      list-style-type: none;
+      display: flex;
+      align-content: center;
+      margin-bottom: 1rem;
+      
+      .dashboard-icon{
+        margin-right: 0.5rem;
+      }
+
+      a{
+        text-decoration: none;
+      }
+    }
+  }
+
+  .dashboard-content{        
+    padding: 1rem;
   }
 }
+
+
+
+
+
+
 
 
 

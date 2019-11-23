@@ -1,23 +1,24 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>    
+    Login: {{ user.name }}
     <span class="spacer"></span>    
     <button mat-button (click)="logOut()">
-      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example user verified icon">exit_to_app</mat-icon>
+      <mat-icon class="dashboard-icon">exit_to_app</mat-icon>
     </button>    
   </mat-toolbar-row>
 </mat-toolbar>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-3 main-content">        
-          <li>
-              <a routerLink="/dashboard/teachers" routerLinkActive="active">Teachers</a> 
-          </li>
-          <li>
-              <a routerLink="/dashboard/students" routerLinkActive="active">Students</a>
-          </li>                
-    </div>
-    <div class="col-sm-9">
-      <router-outlet></router-outlet> 
-     </div>
-  </div>
-</div>
+<mat-sidenav-container class="dashboard-container">
+    <mat-sidenav #sidenav mode="side" opened class="dashboard-sidenav">
+        <li>            
+            <mat-icon class="dashboard-icon" color="accent">school</mat-icon>
+            <a routerLink="/dashboard/teachers" routerLinkActive="active" class="text-light">Teachers</a>
+        </li>
+        <li>
+            <mat-icon class="dashboard-icon" color="accent">person</mat-icon>
+            <a routerLink="/dashboard/students" routerLinkActive="active" class="text-light">Students</a>            
+        </li>                
+    </mat-sidenav>
+    <mat-sidenav-content class="dashboard-content" >
+        <router-outlet></router-outlet> 
+    </mat-sidenav-content>
+  </mat-sidenav-container>

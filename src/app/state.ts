@@ -1,5 +1,5 @@
-import { Teacher } from './dashboard/models/teacher';
-import { Student } from './dashboard/models/student';
+import { Teacher } from './dashboard/shared/models/teacher';
+import { Student } from './dashboard/shared/models/student';
 import { User } from './auth/login/models/user';
 
 export interface State {

@@ -1,3 +1,9 @@
-<p>
-  students works!
-</p>
+<h5>Students</h5>
+<input-search (searchTermTeacher)="searchStudents($event)"
+    [searchPlaceholder]="'Search student'"
+    [hasChanged]="hasChanged"
+    #inputSearchStudent>
+  </input-search>
+<mat-accordion *ngIf="students$ | async as students">  
+    <student-row *ngFor="let student of students" [student]="student"></student-row>
+</mat-accordion>

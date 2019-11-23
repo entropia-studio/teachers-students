@@ -1,3 +1,36 @@
-<p>
-  teachers works!
-</p>
+<h5>Teachers</h5>
+<mat-list *ngIf="teachers$ | async as teachers;else loading" class="teacher-list">  
+  <input-search (searchTermTeacher)="searchTeacher($event)" 
+    [searchPlaceholder]="'Search teacher'">
+  </input-search>          
+  <div *ngFor="let teacher of teachers">    
+    <mat-list-item appHighlight (click)="showStudents(teacher)">        
+      {{ teacher.name }}       
+    </mat-list-item>
+    <mat-divider></mat-divider>        
+  </div>
+</mat-list>
+<mat-list-item *ngIf="students$ | async as students">
+  <input-search (searchTermTeacher)="searchStudents($event)"
+    [searchPlaceholder]="'Search student'"
+    [hasChanged]="hasChanged"
+    #inputSearchStudent>
+  </input-search>          
+  <div *ngIf="students.length > 0;else studentsIsVoid">      
+      <h5>Students for teacher: {{ teacherSelected.name }}</h5>
+    <mat-accordion>
+      <student-row *ngFor="let student of students" [student]="student"></student-row>
+    </mat-accordion>
+  </div>  
+</mat-list-item>
+<ng-template #loading>
+  <div>
+    <img src="assets/loading.svg">
+    Fetching teachers...
+  </div>
+</ng-template>
+<ng-template #studentsIsVoid>
+    <div>      
+      No students assigned to this teacher
+    </div>
+  </ng-template>

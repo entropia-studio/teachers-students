@@ -1,5 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Store } from 'src/app/store';
+import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/auth/login/models/user';
 import { Observable, Subscription} from 'rxjs';
 import { AuthService } from 'src/app/auth/login/services/auth.service';
@@ -10,23 +9,25 @@ import { Router } from '@angular/router';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
 
-  user$:  Observable<User>;
-  subscription: Subscription;
+  user: User;
+  
 
   constructor(
-    private store: Store,
     private authService: AuthService,
     private router: Router
   ) { }
-
+  
+  ngOnInit(){
+    this.user = this.authService.currentUserValue;
+  }
   
 
   logOut(){
 
     this.authService.logout();
-    
+
     this.router.navigate(['/auth/login']);
 
   }
