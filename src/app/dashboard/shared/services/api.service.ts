@@ -5,6 +5,9 @@ import { Teacher } from '../models/teacher';
 import { Store } from 'src/app/store';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Student } from '../models/student';
+import { environment } from 'src/environments/environment';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +16,6 @@ export class APIService {
 
   teachers$: Observable<Teacher[]>;
   students$: Observable<Student[]>;
-
-  apiUrl = 'http://localhost:3000';  // URL to web api
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -25,13 +26,13 @@ export class APIService {
     private http: HttpClient
   ) { 
     
-    this.teachers$ = this.http.get<any>(`${this.apiUrl}/teachers`, this.httpOptions)
+    this.teachers$ = this.http.get<any>(`${environment.apiUrl}/teachers`, this.httpOptions)
     .pipe(      
       map(resp => resp.data.teachers),      
       tap(teachers => this.store.set('teachers',teachers))      
     )
 
-    this.students$ = this.http.get<any>(`${this.apiUrl}/students`, this.httpOptions)
+    this.students$ = this.http.get<any>(`${environment.apiUrl}/students`, this.httpOptions)
     .pipe(            
       map(resp => resp.data.students),      
       tap(students => this.store.set('students',students))      
