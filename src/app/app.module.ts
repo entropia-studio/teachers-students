@@ -16,13 +16,13 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { AuthModule } from './auth/auth.module';
 
 const routes: Routes = [  
-  { path: '', redirectTo: 'teachers', pathMatch: 'full' },
+  { path: '', redirectTo: 'dashboard/teachers', pathMatch: 'full' },
   { path: '**', redirectTo: 'teachers' }   
 ];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent    
   ],
   imports: [
     BrowserModule,    
@@ -32,7 +32,7 @@ const routes: Routes = [
     DashboardModule,
     AuthModule,
     HttpClientModule,
-    RouterModule.forRoot(routes, {enableTracing: false})
+    RouterModule.forRoot(routes, {enableTracing: true})
   ],
   providers: [Store, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
   bootstrap: [AppComponent]

@@ -40,13 +40,22 @@ export class APIService {
 
   }  
 
-  filterStudents(term): Observable<Student[]>{            
+  filterStudents(term, teacher?: Teacher): Observable<Student[]>{            
     
     return this.store.select<Student[]>('students')
     .pipe(      
       map(students => students.filter(student => {
+
         const fullname = student.name.toLowerCase() + ' ' + student.lastname.toLowerCase();
-        return fullname.indexOf(term.toLowerCase()) !== -1 ? true : false;
+        const isStudent = fullname.indexOf(term.toLowerCase()) !== -1 ? true : false;        
+
+        if (teacher){
+          const isTeacher = student.teachers.indexOf(teacher.id) !== -1 ? true : false;
+          return isStudent && isTeacher;
+        }
+
+        return isStudent;
+                
       })),
     )   
 
