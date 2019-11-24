@@ -23,7 +23,9 @@
     </mat-accordion>
   </div>  
 </mat-list-item>
-<app-spinner [placeHolder]="'Fetching teachers...'"></app-spinner>
+<ng-template #loading>
+  <app-spinner [placeHolder]="'Fetching teachers...'"></app-spinner>
+</ng-template>
 <ng-template #studentsIsVoid>
   <div>      
     No students assigned to this teacher

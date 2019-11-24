@@ -6,4 +6,6 @@
 <mat-accordion *ngIf="students$ | async as students;else loading">  
     <student-row *ngFor="let student of students" [student]="student"></student-row>
 </mat-accordion>
-<app-spinner [placeHolder]="'Fetching students...'"></app-spinner>
+<ng-template #loading>
+  <app-spinner [placeHolder]="'Fetching students...'"></app-spinner>
+</ng-template>
