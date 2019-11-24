@@ -34,7 +34,7 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes, {enableTracing: true})
   ],
-  providers: [Store, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
+  providers: [Store, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: false },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
