@@ -32,7 +32,7 @@ const routes: Routes = [
     DashboardModule,
     AuthModule,
     HttpClientModule,
-    RouterModule.forRoot(routes, {enableTracing: true})
+    RouterModule.forRoot(routes, {enableTracing: false})
   ],
   providers: [Store, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
   bootstrap: [AppComponent]
