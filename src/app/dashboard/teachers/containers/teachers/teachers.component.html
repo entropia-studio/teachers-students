@@ -24,13 +24,10 @@
   </div>  
 </mat-list-item>
 <ng-template #loading>
-  <div>
-    <img src="assets/loading.svg">
-    Fetching teachers...
-  </div>
+  <app-spinner [placeHolder]="'Fetching teachers...'"></app-spinner>
 </ng-template>
 <ng-template #studentsIsVoid>
-    <div>      
-      No students assigned to this teacher
-    </div>
-  </ng-template>
+  <div>      
+    No students assigned to this teacher
+  </div>
+</ng-template>
