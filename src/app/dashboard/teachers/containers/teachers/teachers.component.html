@@ -23,14 +23,9 @@
     </mat-accordion>
   </div>  
 </mat-list-item>
-<ng-template #loading>
-  <div>
-    <img src="assets/loading.svg">
-    Fetching teachers...
+<app-spinner [placeHolder]="'Fetching teachers...'"></app-spinner>
+<ng-template #studentsIsVoid>
+  <div>      
+    No students assigned to this teacher
   </div>
 </ng-template>
-<ng-template #studentsIsVoid>
-    <div>      
-      No students assigned to this teacher
-    </div>
-  </ng-template>
