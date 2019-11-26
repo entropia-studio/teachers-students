@@ -1,0 +1,29 @@
+<div class="row p-2 teacher-row" appHighlight >
+  <div class="col-6 d-flex align-items-center"  (click)="teacherClicked()">
+    {{ teacher.name }}       
+  </div>
+  <div class="col-6 d-flex justify-content-end align-items-center">
+    <button mat-icon-button (click)="editTeacher()">
+      <mat-icon>mode_edit</mat-icon>
+    </button>
+    <button mat-icon-button (click)="toggle()" [style.display]="toggled ? 'none' : 'inline'">
+      <mat-icon>delete</mat-icon>
+    </button>
+    <div *ngIf="toggled" class="ml-2">
+      <p>Delete item?</p>
+      <button 
+        type="button"
+        class="btn btn-danger btn-sm mr-2"
+        (click)="removeTeacher()">
+          Yes
+      </button>
+      
+      <button         
+        type="button"
+        class="btn btn-light btn-sm"
+        (click)="toggle()">
+        No
+      </button>
+    </div>
+  </div>
+</div>

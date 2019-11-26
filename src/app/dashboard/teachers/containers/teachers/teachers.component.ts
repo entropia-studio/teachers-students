@@ -58,4 +58,12 @@ export class TeachersComponent implements OnInit, OnDestroy {
     this.students$ = this.apiService.filterStudents(term, this.teacherSelected);
   }
 
+  editTeacher(event: Teacher){
+    console.log(event)
+  }
+
+  removeTeacher(event: Teacher){
+    console.log(event)
+  }
+
 }

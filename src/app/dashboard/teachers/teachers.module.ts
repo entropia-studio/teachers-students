@@ -12,6 +12,10 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatExpansionModule} from '@angular/material/expansion'; 
 import {MatDividerModule} from '@angular/material/divider';
+import {MatIconModule} from '@angular/material/icon';
+
+
+import { TeacherRowComponent } from './components/teacher-row/teacher-row.component';
 
 const routes: Routes = [
   {path: '', component: TeachersComponent}
@@ -20,7 +24,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     TeachersComponent,
-    HighlightDirective,    
+    HighlightDirective,
+    TeacherRowComponent,    
   ],
   imports: [
     CommonModule,        
@@ -31,6 +36,7 @@ const routes: Routes = [
     MatExpansionModule,
     MatDividerModule,    
     SharedmoduleModule,
+    MatIconModule,
     RouterModule.forChild(routes)
   ]
 })

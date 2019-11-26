@@ -4,9 +4,13 @@
     [searchPlaceholder]="'Search teacher'">
   </input-search>          
   <div *ngFor="let teacher of teachers">    
-    <mat-list-item appHighlight (click)="showStudents(teacher)">        
-      {{ teacher.name }}       
-    </mat-list-item>
+    <teacher-row
+      [teacher]="teacher"
+      (showStudents)="showStudents($event)"
+      (edit)="editTeacher($event)"
+      (remove)="removeTeacher($event)"
+      >
+  </teacher-row>
     <mat-divider></mat-divider>        
   </div>
 </mat-list>
