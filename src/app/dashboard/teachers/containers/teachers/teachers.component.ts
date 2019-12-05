@@ -5,6 +5,7 @@ import { Teacher } from 'src/app/dashboard/shared/models/teacher';
 import { APIService } from '../../../shared/services/api.service';
 import { Store } from 'src/app/store';
 import { Student } from 'src/app/dashboard/shared/models/student';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-teachers',
@@ -21,7 +22,8 @@ export class TeachersComponent implements OnInit, OnDestroy {
 
   constructor(  
     private apiService: APIService,
-    private store: Store
+    private store: Store,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -58,8 +60,8 @@ export class TeachersComponent implements OnInit, OnDestroy {
     this.students$ = this.apiService.filterStudents(term, this.teacherSelected);
   }
 
-  editTeacher(event: Teacher){
-    console.log(event)
+  editTeacher(event: Teacher){    
+    this.router.navigate(['/dashboard/teachers/',event.id]);
   }
 
   removeTeacher(event: Teacher){

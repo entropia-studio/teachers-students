@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { map, tap, debounceTime } from 'rxjs/operators';
+import { map, tap, filter } from 'rxjs/operators';
 import { Teacher } from '../models/teacher';
 import { Store } from 'src/app/store';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -70,6 +70,16 @@ export class APIService {
 
   }
   
+  getWorkout(id: string) : Observable<Teacher> {
+    
+    if (!id) return of(<Teacher>{});    
+    
+    return this.store.select<Teacher>('teachers')
+      .pipe(
+        filter(Boolean),
+          map((teachers: any) => teachers.find((teacher: Teacher) => teacher.id === id))
+      )
+  }
 
 
 

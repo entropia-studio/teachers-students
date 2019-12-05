@@ -1,0 +1,22 @@
+<form [formGroup]="teacherForm" (ngSubmit)="onSubmit()">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="teacher-field">
+          <input matInput placeholder="Name" formControlName="name">
+        </mat-form-field>
+        <mat-form-field class="teacher-field">
+          <input matInput placeholder="Email" formControlName="email">
+        </mat-form-field>
+        <mat-form-field class="teacher-field">
+          <input matInput placeholder="Phone" formControlName="phone">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 d-flex justify-content-center">
+        <button mat-button type="submit">Send</button>
+      </div>
+    </div>
+    </div>
+</form>

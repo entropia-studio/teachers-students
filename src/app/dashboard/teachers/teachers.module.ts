@@ -16,16 +16,21 @@ import {MatIconModule} from '@angular/material/icon';
 
 
 import { TeacherRowComponent } from './components/teacher-row/teacher-row.component';
+import { TeacherFormComponent } from './components/teacher-form/teacher-form.component';
+import { TeacherComponent } from './containers/teacher/teacher.component';
 
 const routes: Routes = [
-  {path: '', component: TeachersComponent}
+  {path: '', component: TeachersComponent},
+  {path: ':id', component: TeacherComponent}
 ];
 
 @NgModule({
   declarations: [
     TeachersComponent,
     HighlightDirective,
-    TeacherRowComponent,    
+    TeacherRowComponent,
+    TeacherFormComponent,
+    TeacherComponent,    
   ],
   imports: [
     CommonModule,        

@@ -1,0 +1,6 @@
+<div *ngIf="teacher$ | async as teacher">
+<teacher-form
+  (submitted)="updateTeacher($event)"
+  [teacher]="teacher">
+</teacher-form>
+</div>
