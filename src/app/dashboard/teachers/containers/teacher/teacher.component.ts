@@ -4,6 +4,7 @@ import { Observable, Subscription } from 'rxjs';
 import { APIService } from 'src/app/dashboard/shared/services/api.service';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-teacher',
@@ -18,18 +19,37 @@ export class TeacherComponent implements OnInit {
   constructor(
     private apiService: APIService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit(){
     this.subscription = this.apiService.teachers$.subscribe();
     this.teacher$ = this.route.paramMap.pipe(
-      switchMap((params: ParamMap) => this.apiService.getWorkout(params.get('id')))
+      switchMap((params: ParamMap) => this.apiService.getTeacher(params.get('id')))
     )
   }
 
-  updateTeacher(teacher: Teacher){
-    console.log('update teacher')
+  async updateTeacher(event: Teacher){
+    const id = this.route.snapshot.params.id;
+    await this.apiService.updateTeacher(id,event).subscribe((resp:any) => this.openSnackBar(resp.message,null));
+    
   }
+
+  async createTeacher(event: Teacher){
+    await this.apiService.addTeacher(event).subscribe((resp:any) => {      
+      this.openSnackBar(resp.message,null);
+      this.router.navigate(['/dashboard/teachers'])
+    }); 
+    
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
+
+  
 
 }

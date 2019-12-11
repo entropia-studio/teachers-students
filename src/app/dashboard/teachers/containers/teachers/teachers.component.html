@@ -1,4 +1,12 @@
-<h5>Teachers</h5>
+
+ <div class="row">
+   <div class="col-6"><h5>Teachers</h5></div>
+   <div class="col-6 text-right">
+    <button mat-icon-button (click)="createTeacher()">
+      <mat-icon>add_circle</mat-icon>
+    </button>
+   </div>
+ </div>
 <mat-list *ngIf="teachers$ | async as teachers;else loading" class="teacher-list">  
   <input-search (searchTermTeacher)="searchTeacher($event)" 
     [searchPlaceholder]="'Search teacher'">

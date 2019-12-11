@@ -30,15 +30,16 @@ export class APIService {
     .pipe(      
       map(resp => resp.data.teachers),      
       tap(teachers => this.store.set('teachers',teachers))      
-    )
+    )    
 
     this.students$ = this.http.get<any>(`${environment.apiUrl}/students`, this.httpOptions)
     .pipe(            
       map(resp => resp.data.students),      
       tap(students => this.store.set('students',students))      
-    )   
-
+    )
   }  
+
+  
 
   filterStudents(term, teacher?: Teacher): Observable<Student[]>{            
     
@@ -53,10 +54,8 @@ export class APIService {
           const isTeacher = student.teachers.indexOf(teacher.id) !== -1 ? true : false;
           return isStudent && isTeacher;
         }
-
-        return isStudent;
-                
-      })),
+        return isStudent;                
+      }))
     )   
 
   }
@@ -70,9 +69,9 @@ export class APIService {
 
   }
   
-  getWorkout(id: string) : Observable<Teacher> {
-    
-    if (!id) return of(<Teacher>{});    
+  getTeacher(id: string) : Observable<Teacher> {    
+
+    if (!id || id == 'new') return of(<Teacher>{});    
     
     return this.store.select<Teacher>('teachers')
       .pipe(
@@ -81,6 +80,22 @@ export class APIService {
       )
   }
 
+  addTeacher(teacher: Teacher){
+    return this.http.post<Teacher>(`${environment.apiUrl}/teachers`,teacher);      
+  }
 
+  updateTeacher(id: string, teacher: Teacher){
+    return this.http.put(`${environment.apiUrl}/teachers/${id}`,teacher);
+  }
+
+  removeTeacher(id: string){
+    return this.http.delete(`${environment.apiUrl}/teachers/${id}`).pipe(
+      tap(() => {
+        this.teachers$.subscribe(teachers => {          
+          this.store.set('teachers',teachers.filter(teacher => teacher.id !== id));
+        })
+      })
+    )
+  }
 
 }

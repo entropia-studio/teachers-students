@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Teacher } from 'src/app/dashboard/shared/models/teacher';
 import { APIService } from '../../../shared/services/api.service';
 import { Store } from 'src/app/store';
 import { Student } from 'src/app/dashboard/shared/models/student';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-teachers',
@@ -23,7 +24,8 @@ export class TeachersComponent implements OnInit, OnDestroy {
   constructor(  
     private apiService: APIService,
     private store: Store,
-    private router: Router
+    private router: Router,
+    private _snackBar : MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -65,7 +67,33 @@ export class TeachersComponent implements OnInit, OnDestroy {
   }
 
   removeTeacher(event: Teacher){
-    console.log(event)
+    
+    this.apiService.removeTeacher(event.id).subscribe((resp : any) => {
+      
+      // this.store.select<Student[]>('students').pipe(
+      //   map(teachers => {
+      //     console.log('teachers01 ', teachers)
+      //     teachers.filter(teacher => teacher.id !== event.id)
+      //   }),
+      //   tap(
+      //     teachers => {
+      //       console.log('teachers ', teachers)
+      //       this.store.set('teachers',teachers)
+      //   }
+      //   )
+      // )
+      this.openSnackBar(resp.message,null);      
+    })
+  }
+
+  createTeacher(){
+    this.router.navigate(['/dashboard/teachers/new']);
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 
 }

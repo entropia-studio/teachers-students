@@ -13,7 +13,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatExpansionModule} from '@angular/material/expansion'; 
 import {MatDividerModule} from '@angular/material/divider';
 import {MatIconModule} from '@angular/material/icon';
-
+import {MatSnackBarModule} from '@angular/material/snack-bar'; 
 
 import { TeacherRowComponent } from './components/teacher-row/teacher-row.component';
 import { TeacherFormComponent } from './components/teacher-form/teacher-form.component';
@@ -21,7 +21,8 @@ import { TeacherComponent } from './containers/teacher/teacher.component';
 
 const routes: Routes = [
   {path: '', component: TeachersComponent},
-  {path: ':id', component: TeacherComponent}
+  {path: ':id', component: TeacherComponent},
+  {path: 'new', component: TeacherComponent}
 ];
 
 @NgModule({
@@ -42,6 +43,7 @@ const routes: Routes = [
     MatDividerModule,    
     SharedmoduleModule,
     MatIconModule,
+    MatSnackBarModule,
     RouterModule.forChild(routes)
   ]
 })

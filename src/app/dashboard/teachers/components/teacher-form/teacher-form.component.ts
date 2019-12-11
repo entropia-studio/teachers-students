@@ -14,11 +14,14 @@ export class TeacherFormComponent implements OnInit {
   teacher: Teacher;
 
   @Output()
-  submitted = new EventEmitter<Teacher>();
+  update = new EventEmitter<Teacher>();
+
+  @Output()
+  create = new EventEmitter<Teacher>();
 
   exists: Boolean = false;
 
-  teacherForm = this.fb.group({
+  teacherForm = this.fb.group({    
     'name': ['',[Validators.required]],
     'email': ['',[Validators.email, Validators.required]],
     'phone': ['',[Validators.required]]
@@ -34,11 +37,17 @@ export class TeacherFormComponent implements OnInit {
     this.teacherForm.patchValue(value);
   }
 
-  onSubmit(teacher: Teacher){
-    this.submitted.emit(teacher);
+  createTeacher(){
+    if (this.teacherForm.valid){
+      this.create.emit(this.teacherForm.value);
+    }
   }
 
-  
+  updateTeacher(){
+    if (this.teacherForm.valid){
+      this.update.emit(this.teacherForm.value);
+    }
+  }
 
 }
 
