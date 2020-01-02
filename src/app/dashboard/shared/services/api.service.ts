@@ -90,10 +90,13 @@ export class APIService {
 
   removeTeacher(id: string){
     return this.http.delete(`${environment.apiUrl}/teachers/${id}`).pipe(
-      tap(() => {
+      tap((resp : any) => {
+        if (resp.status !== 'success'){
+          return;
+        }
         this.teachers$.subscribe(teachers => {          
           this.store.set('teachers',teachers.filter(teacher => teacher.id !== id));
-        })
+        })        
       })
     )
   }

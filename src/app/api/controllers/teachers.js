@@ -1,8 +1,7 @@
 const teacherModel = require('../models/teachers');
 
 module.exports = {
-    getById: function (req, res, next) {
-        console.log(req.body);
+    getById: function (req, res, next) {        
         teacherModel.findById(req.params.teacherId, function (err, teacherInfo) {
             if (err) {
                 next(err);
@@ -43,14 +42,16 @@ module.exports = {
         });
     },
     updateById: function (req, res, next) {
-        teacherModel.findByIdAndUpdate(req.params.teacherId, {
+
+        teacherModel.findByIdAndUpdate(req.params.teacherId,{
             name: req.body.name,
             email: req.body.email,
             phone: req.body.phone
-        }, function (err, teacherInfo) {
-            if (err)
+        }, {runValidators: true} , function (err, teacherInfo) {
+            if (err){                
+                res.json(err);
                 next(err);
-            else {
+            } else {
                 res.json({
                     status: "success",
                     message: "Teacher updated successfully!!!",
@@ -58,6 +59,7 @@ module.exports = {
                 });
             }
         });
+        
     },
     deleteById: function (req, res, next) {
         teacherModel.findByIdAndRemove(req.params.teacherId, function (err, teacherInfo) {

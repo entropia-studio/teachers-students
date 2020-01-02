@@ -68,20 +68,7 @@ export class TeachersComponent implements OnInit, OnDestroy {
 
   removeTeacher(event: Teacher){
     
-    this.apiService.removeTeacher(event.id).subscribe((resp : any) => {
-      
-      // this.store.select<Student[]>('students').pipe(
-      //   map(teachers => {
-      //     console.log('teachers01 ', teachers)
-      //     teachers.filter(teacher => teacher.id !== event.id)
-      //   }),
-      //   tap(
-      //     teachers => {
-      //       console.log('teachers ', teachers)
-      //       this.store.set('teachers',teachers)
-      //   }
-      //   )
-      // )
+    this.apiService.removeTeacher(event.id).subscribe((resp : any) => {      
       this.openSnackBar(resp.message,null);      
     })
   }

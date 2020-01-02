@@ -19,6 +19,7 @@
           mat-button
           type="submit"
           *ngIf="exists"
+          color="warn"
           (click)="updateTeacher()">
           Update
         </button>
@@ -26,6 +27,7 @@
           mat-button
           type="submit"
           *ngIf="!exists"
+          color="warn"
           (click)="createTeacher()">
           Create
         </button>
